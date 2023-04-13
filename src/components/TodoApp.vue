@@ -17,7 +17,7 @@
       <thead>
         <tr>
           <th scope="col">Task</th>
-          <th scope="col">Time</th>
+          <th scope="col">Status</th>
           <th scope="col" class="text-center"></th>
           <th scope="col" class="text-center"></th>
         </tr>
@@ -25,7 +25,7 @@
       <tbody>
         <tr v-for="(task, index) in tasks" :key="index">
           <th>{{ task.name }}</th>
-          <td>{{ task.time }}</td>
+          <td>{{ task.status }}</td>
           <td class="text-center">
             <button class="btn btn-primary rounded-0" @click="editTask(index)">
               Edit
@@ -52,6 +52,7 @@ export default {
     return {
       task: '',
       editedTask: null,
+      availableStatus: ['todo', 'in-progress', 'finished'],
       tasks: [],
     };
   },
@@ -61,7 +62,7 @@ export default {
       if (this.editedTask === null) {
         this.tasks.push({
           name: this.task,
-          time: '6:00',
+          
         });
       } else {
         this.tasks[this.editedTask].name = this.task;
