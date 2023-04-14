@@ -22,7 +22,7 @@ import TodoApp from './TodoApp.vue';
 import FolderAdd from './FolderAdd.vue';
 
 export default {
-  name: 'AdTodo',
+  name: 'TodoAll',
   props: {
     msg: String,
   },
