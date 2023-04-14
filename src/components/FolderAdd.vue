@@ -8,7 +8,7 @@
         placeholder="Enter folder"
         class="form-control m-2"
       />
-      <button class="btn btn-success rounded-0" @click="submitfolder">
+      <button class="btn btn-warning rounded-0" @click="submitfolder">
         Submit
       </button>
     </div>
@@ -18,17 +18,18 @@
         v-for="(folder, index) in folders"
         :key="index"
       >
-        <div class="d-flex flex-row text-center">
+        <div class="d-flex flex-row justify-content-center">
           <li class="list-group-item">
-            <div class="text-center" @click="showList">
-              <span class="fa-solid fa-folder"></span>{{ folder.name }}
+            <div @click="showList">
+              <span class="fa-solid fa-folder" class="mx-1"></span
+              >{{ folder.name }}
             </div>
             <component v-bind:is="listComponent"></component>
           </li>
-          <div @click="editfolder(index)">
+          <div @click="editfolder(index)" class="m-2">
             <span class="fa fa-pen pointer"></span>
           </div>
-          <div @click="deletefolder(index)">
+          <div @click="deletefolder(index)" class="m-2">
             <span class="fa fa-trash pointer"></span>
           </div>
         </div>
