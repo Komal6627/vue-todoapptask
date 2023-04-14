@@ -24,8 +24,23 @@
       </thead>
       <tbody>
         <tr v-for="(task, index) in tasks" :key="index">
-          <th>{{ task.name }}</th>
-          <td>{{ task.status }}</td>
+          <td>
+            <span :class="{ 'line-through': task.status === 'finished' }">{{
+              task.name
+            }}</span>
+          </td>
+          <td style="width: 120px">
+            <span
+              class="pointer noselect"
+              @click="changeStatus(index)"
+              :class="{
+                'text-danger': task.status === 'to-do',
+                'text-success': task.status === 'finished',
+                'text-warning': task.status === 'in-progress',
+              }"
+              >{{ firstCharUpper(task.status) }}</span
+            >
+          </td>
           <td class="text-center">
             <button class="btn btn-primary rounded-0" @click="editTask(index)">
               Edit
@@ -52,7 +67,7 @@ export default {
     return {
       task: '',
       editedTask: null,
-      availableStatus: ['todo', 'in-progress', 'finished'],
+      availableStatuses: ['todo', 'in-progress', 'finished'],
       tasks: [],
     };
   },
@@ -62,10 +77,11 @@ export default {
       if (this.editedTask === null) {
         this.tasks.push({
           name: this.task,
-          
+          status: 'todo',
         });
       } else {
         this.tasks[this.editedTask].name = this.task;
+
         this.editedTask = null;
       }
 
@@ -78,6 +94,25 @@ export default {
       this.task = this.tasks[index].name;
       this.editedTask = index;
     },
+
+    changeStatus(index) {
+      let newIndex = this.availableStatuses.indexOf(this.tasks[index].status);
+      if (++newIndex > 2) newIndex = 0;
+      this.tasks[index].status = this.availableStatuses[newIndex];
+    },
+
+    firstCharUpper(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
   },
 };
 </script>
+
+<style scoped>
+.pointer {
+  cursor: pointer;
+}
+.line-through {
+  text-decoration: line-through;
+}
+</style>
