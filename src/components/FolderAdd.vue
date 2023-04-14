@@ -13,12 +13,25 @@
       </button>
     </div>
     <div>
-      <ul class="list-group" v-for="(folder, index) in folders" :key="index">
-        <li class="list-group-item">
-          <!-- <font-awesome-icon icon="fa-solid fa-folder" /> -->
-          <button btn btn-success @click="showList">{{ folder.name }}</button>
-          <component v-bind:is="listComponent"></component>
-        </li>
+      <ul
+        class="list-group text-center"
+        v-for="(folder, index) in folders"
+        :key="index"
+      >
+        <div class="d-flex flex-row text-center">
+          <li class="list-group-item">
+            <div class="text-center" @click="showList">
+              <span class="fa-solid fa-folder"></span>{{ folder.name }}
+            </div>
+            <component v-bind:is="listComponent"></component>
+          </li>
+          <div @click="editfolder(index)">
+            <span class="fa fa-pen pointer"></span>
+          </div>
+          <div @click="deletefolder(index)">
+            <span class="fa fa-trash pointer"></span>
+          </div>
+        </div>
       </ul>
     </div>
   </div>
@@ -54,7 +67,7 @@ export default {
         this.editedFolder = null;
       }
 
-      this.folder = '';
+      this.folder = ' ';
     },
     deletefolder(index) {
       this.folders.splice(index, 1);

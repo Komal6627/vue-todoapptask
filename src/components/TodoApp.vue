@@ -42,14 +42,14 @@
             >
           </td>
           <td class="text-center">
-            <button class="btn btn-primary rounded-0" @click="editTask(index)">
-              Edit
-            </button>
+            <div @click="editTask(index)">
+              <span class="fa fa-pen pointer"></span>
+            </div>
           </td>
           <td class="text-center">
-            <button class="btn btn-danger rounded-0" @click="deleteTask()">
-              Delete
-            </button>
+            <div @click="deleteTask(index)">
+              <span class="fa fa-trash pointer"></span>
+            </div>
           </td>
         </tr>
       </tbody>
